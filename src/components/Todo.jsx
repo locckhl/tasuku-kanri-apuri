@@ -18,7 +18,7 @@ function Todo() {
   const [tasks, setTask] = useState([
     {
       text: "clean room",
-      deadLine: new Date(Date.now()).toLocaleDateString(),
+      deadLine: new Date("4/11/2000").toLocaleDateString(),
       done: false,
       key: getKey(),
     },
@@ -28,12 +28,18 @@ function Todo() {
       done: false,
       key: getKey(),
     },
+    {
+      text: "clean room",
+      deadLine: new Date("4/11/2040").toLocaleDateString(),
+      done: false,
+      key: getKey(),
+    },
   ]);
 
   const displayItems = tasks;
 
   const handleInput = (text) => {
-    console.log("inputed")
+    console.log("inputed");
     setTask([
       ...tasks,
       {
@@ -65,11 +71,7 @@ function Todo() {
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
           {tasks.map((task) => (
-            <TodoItem
-              task={task}
-              handleCheckBox={handleCheckBox}
-              
-            />
+            <TodoItem task={task} handleCheckBox={handleCheckBox} />
           ))}
         </div>
       </div>

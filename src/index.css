@@ -87,3 +87,7 @@ body {
 .item-done{
   text-decoration: line-through;
 }
+
+h5 i.fa{
+  cursor: pointer;
+}
