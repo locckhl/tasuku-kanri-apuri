@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 /* 
   【Todoのデータ構成】
 　・key：Todoを特定するID（String）
@@ -7,22 +7,40 @@ import React, { useState } from 'react';
 */
 
 /* コンポーネント */
-import TodoItem from './TodoItem';
-import Input from './Input';
-import Filter from './Filter';
+import TodoItem from "./TodoItem";
+import Input from "./Input";
+import Filter from "./Filter";
 
-
+/* ライブラリ */
+import { getKey } from "../lib/util";
 
 function Todo() {
+  const [tasks, setTask] = useState([
+    {
+      text: "clean room",
+      deadLine: new Date(Date.now()).toLocaleDateString(),
+      done: false,
+      key: getKey(),
+    },
+    {
+      text: "eat, sleep",
+      deadLine: new Date(Date.now()).toLocaleDateString(),
+      done: false,
+      key: getKey(),
+    },
+  ]);
+
+  const displayItems = tasks
 
   return (
     <div className="row mx-1 px-5 pb-3 w-80 list">
-    <div className="col mx-auto d-flex flex-column justify-content-between ">
-      {/* Todo Item 1 */}
-      <TodoItem></TodoItem>
-   </div>
-  </div>
-
+      <div className="col mx-auto d-flex flex-column justify-content-between ">
+        {/* Todo Item 1 */}
+        {tasks.map(task => (
+          <TodoItem task={task}/>
+        ))}
+      </div>
+    </div>
   );
 }
 

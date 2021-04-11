@@ -3,23 +3,23 @@ import "./App.css";
 import Input from "./components/Input";
 import Filter from "./components/Filter";
 import Todo from "./components/Todo";
+import UserInfo from "./components/UserInfo";
+import { useState } from "react";
+
+
 
 function App() {
+  const [user, setUser] = useState({
+    avatar: "string",
+    name: "nyaaaaa",
+  });
+
+
   return (
     <div className="container  ">
       <div className="custom-container rounded mx-auto bg-light shadow popup">
         {/* App title section  */}
-        <div className="row m-1 p-4">
-          <div className="col">
-            <div className="p-1 h1 text-primary text-center mx-auto d-flex justify-content-center align-items-center">
-              {/* <i className="fa fa-check bg-primary text-white rounded p-2"></i>  */}
-              <div className="avatar mx-3">
-                <img src="images/avt.jpg" />
-              </div>
-              <b>User name</b>
-            </div>
-          </div>
-        </div>
+        <UserInfo user={user}></UserInfo>
         {/* Create todo section  */}
         <Input></Input>
         <div className="p-2 mx-4 border-black-25 border-bottom"></div>

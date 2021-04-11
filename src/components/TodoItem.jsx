@@ -4,11 +4,11 @@
 　・チェックボックスにチェックが入っているか管理する
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
-function TodoItem( {item, onCheck} ) {
+function TodoItem( {task} ) {
 
   return (
     <div
-    className="row px-3 align-items-center todo-item rounded"
+    className={task.done? 'row px-3 align-items-center todo-item rounded item-done':'row px-3 align-items-center todo-item rounded'}
     style={{
       backgroundImage: "linear-gradient(to right, purple, pink)",
     }}
@@ -35,7 +35,7 @@ function TodoItem( {item, onCheck} ) {
         type="text"
         className="form-control form-control-lg border-0 edit-todo-input bg-transparent rounded px-3"
         readonly
-        value="Task 1"
+        value={task.text}
         title="Buy groceries for next week"
       />
       <input
@@ -54,7 +54,7 @@ function TodoItem( {item, onCheck} ) {
             title=""
             data-original-title="Due on date"
           ></i>
-          <span className="text spanr-2">28th Jun 2020</span>
+          <span className="text">{task.deadLine}</span>
         </div>
       </div>
     </div>

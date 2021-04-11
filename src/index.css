@@ -83,3 +83,7 @@ body {
 .todo-item{
   margin: 3px 0 3px 0;
 }
+
+.item-done{
+  text-decoration: line-through;
+}
