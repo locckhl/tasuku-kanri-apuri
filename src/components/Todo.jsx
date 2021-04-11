@@ -30,26 +30,50 @@ function Todo() {
     },
   ]);
 
-  const displayItems = tasks
+  const displayItems = tasks;
+
+  const handleInput = (text) => {
+    console.log("inputed")
+    setTask([
+      ...tasks,
+      {
+        text: text,
+        deadLine: new Date(Date.now()).toLocaleDateString(),
+        done: false,
+        key: getKey(),
+      },
+    ]);
+  };
 
   const handleCheckBox = (checkedTask) => {
-    const newItems = tasks.map(task => {
+    const newItems = tasks.map((task) => {
       if (task.key === checkedTask.key) {
         task.done = !task.done;
       }
       return task;
     });
     setTask(newItems);
-  }
+  };
   return (
-    <div className="row mx-1 px-5 pb-3 w-80 list">
-      <div className="col mx-auto d-flex flex-column justify-content-between ">
-        {/* Todo Item 1 */}
-        {tasks.map(task => (
-          <TodoItem task={task} handleCheckBox={handleCheckBox}/>
-        ))}
+    <React.Fragment>
+      {/* Create todo section  */}
+      <Input handleInput={handleInput}></Input>
+      <div className="p-2 mx-4 border-black-25 border-bottom"></div>
+      {/* View options section  */}
+      <Filter></Filter>
+      <div className="row mx-1 px-5 pb-3 w-80 list">
+        <div className="col mx-auto d-flex flex-column justify-content-between ">
+          {/* Todo Item 1 */}
+          {tasks.map((task) => (
+            <TodoItem
+              task={task}
+              handleCheckBox={handleCheckBox}
+              
+            />
+          ))}
+        </div>
       </div>
-    </div>
+    </React.Fragment>
   );
 }
 

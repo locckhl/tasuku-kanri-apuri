@@ -20,11 +20,7 @@ function App() {
       <div className="custom-container rounded mx-auto bg-light shadow popup">
         {/* App title section  */}
         <UserInfo user={user}></UserInfo>
-        {/* Create todo section  */}
-        <Input></Input>
-        <div className="p-2 mx-4 border-black-25 border-bottom"></div>
-        {/* View options section  */}
-        <Filter></Filter>
+        
         {/* Todo list section  */}
         <Todo></Todo>
       </div>

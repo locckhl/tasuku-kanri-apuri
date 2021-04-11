@@ -4,7 +4,7 @@
 　・チェックボックスにチェックが入っているか管理する
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
-function TodoItem({ task, handleCheckBox }) {
+function TodoItem({ task, handleCheckBox, handleInput }) {
   return (
     <div
       className={
