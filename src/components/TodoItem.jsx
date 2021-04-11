@@ -4,7 +4,7 @@
 　・チェックボックスにチェックが入っているか管理する
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
-function TodoItem({ task, handleCheckBox, handleInput }) {
+function TodoItem({ task, handleCheckBox, handleInput, deleteTask }) {
   return (
     <div
       className={
@@ -73,7 +73,7 @@ function TodoItem({ task, handleCheckBox, handleInput }) {
           <i className="fa fa-pencil"></i>
         </h5>
         <h5 className="m-0 p-0 px-1">
-          <i className="fa fa-trash-o"></i>
+          <i className="fa fa-trash-o" onClick={() => {deleteTask(task);}}></i>
         </h5>
       </div>
     </div>

@@ -5,8 +5,9 @@ import React, { useState } from "react";
 　・Enterをクリックされたら入力された文字を使って新しいTodoを作成する
 */
 function Input({ handleInput }) {
-  const [content, setContent] = useState();
-
+  const [content, setContent] = useState("");
+  const [newDate, setNewDate] = useState((new Date()).toISOString().substr(0,10));
+  const errorMes = "Input cannot be empty. Please enter something."
   return (
     <div className="row m-1 px-5">
       <div className="col col-11 mx-auto border ">
@@ -16,12 +17,18 @@ function Input({ handleInput }) {
               className="border-0 add-todo-input bg-transparent rounded w-100"
               type="text"
               placeholder="Add new .."
+              value = {content}
               onChange={(e) => {
                 setContent(e.target.value);
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleInput(e.target.value);
+                  if(content === "")
+                    alert(errorMes)
+                  else {
+                    setContent("");
+                    handleInput(content, newDate);
+                  }
                 }
               }}
             />
@@ -42,14 +49,19 @@ function Input({ handleInput }) {
             data-placement="bottom"
             title="Clear Due date"
           ></i> */}
-            <input type="date" />
+            <input type="date" value = {newDate} onChange = {e => setNewDate(e.target.value)}/>
           </div>
           <div className="col-auto px-0 mx-0 mr-2">
             <button
               type="button"
               className="btn btn-primary"
               onClick={() => {
-                handleInput(content);
+                if(content === "")
+                    alert(errorMes)
+                else {
+                  setContent("");
+                  handleInput(content, newDate);
+                }
               }}
             >
               Add
