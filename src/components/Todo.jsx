@@ -38,13 +38,13 @@ function Todo() {
 
   const displayItems = tasks;
 
-  const handleInput = (text) => {
+  const handleInput = (text, newDate) => {
     console.log("inputed");
     setTask([
       ...tasks,
       {
         text: text,
-        deadLine: new Date(Date.now()).toLocaleDateString(),
+        deadLine: new Date(newDate).toLocaleDateString(),
         done: false,
         key: getKey(),
       },
@@ -60,6 +60,12 @@ function Todo() {
     });
     setTask(newItems);
   };
+
+  const deleteTask = chosenTask => {
+    const newItems = tasks.filter(task => task.key !== chosenTask.key);
+    setTask(newItems);
+  }
+
   return (
     <React.Fragment>
       {/* Create todo section  */}
@@ -71,7 +77,7 @@ function Todo() {
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
           {tasks.map((task) => (
-            <TodoItem task={task} handleCheckBox={handleCheckBox} />
+            <TodoItem task={task} handleCheckBox={handleCheckBox} deleteTask={deleteTask}/>
           ))}
         </div>
       </div>

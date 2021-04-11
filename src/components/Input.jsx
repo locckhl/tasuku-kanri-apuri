@@ -6,6 +6,7 @@ import React, { useState } from "react";
 */
 function Input({ handleInput }) {
   const [content, setContent] = useState();
+  const [newDate, setNewDate] = useState((new Date()).toISOString().substr(0,10));
 
   return (
     <div className="row m-1 px-5">
@@ -16,12 +17,14 @@ function Input({ handleInput }) {
               className="border-0 add-todo-input bg-transparent rounded w-100"
               type="text"
               placeholder="Add new .."
+              value = {content}
               onChange={(e) => {
                 setContent(e.target.value);
               }}
               onKeyDown={(e) => {
                 if (e.key === "Enter") {
-                  handleInput(e.target.value);
+                  setContent("");
+                  handleInput(content, newDate);
                 }
               }}
             />
@@ -42,14 +45,15 @@ function Input({ handleInput }) {
             data-placement="bottom"
             title="Clear Due date"
           ></i> */}
-            <input type="date" />
+            <input type="date" value = {newDate} onChange = {e => setNewDate(e.target.value)}/>
           </div>
           <div className="col-auto px-0 mx-0 mr-2">
             <button
               type="button"
               className="btn btn-primary"
               onClick={() => {
-                handleInput(content);
+                setContent("");
+                handleInput(content, newDate);
               }}
             >
               Add
