@@ -4,7 +4,9 @@
 　・チェックボックスにチェックが入っているか管理する
 　・チェックボックスにチェックが入っているかアイテムをグレーアウトする
 */
-function TodoItem({ task, handleCheckBox, handleInput, deleteTask }) {
+import { Button } from "react-bootstrap";
+import Edit from "./Edit";
+function TodoItem({ task, handleCheckBox, handleEdit, deleteTask }) {
   return (
     <div
       className={
@@ -68,13 +70,22 @@ function TodoItem({ task, handleCheckBox, handleInput, deleteTask }) {
         </div>
       </div>
 
-      <div className="col-auto d-flex align-items-center justify-content-end px-0">
-        <h5 className="m-0 p-0 px-1">
+      <div className="col-auto d-flex align-items-center justify-content-between px-0">
+        {/* <h5 className="m-0 p-0 px-1">
           <i className="fa fa-pencil"></i>
         </h5>
         <h5 className="m-0 p-0 px-1">
           <i className="fa fa-trash-o" onClick={() => {deleteTask(task);}}></i>
-        </h5>
+        </h5> */}
+        <Edit task={task} handleInput={handleEdit} />
+        <Button className="ml-1">
+          <i
+            className="fa fa-trash-o"
+            onClick={() => {
+              deleteTask(task);
+            }}
+          ></i>
+        </Button>
       </div>
     </div>
   );

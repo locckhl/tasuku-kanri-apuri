@@ -118,3 +118,7 @@ input[type="file"] {
   background-color: white;
   color: #0069D9;
 }
+
+.mw-80{
+  max-width: 50%;
+}

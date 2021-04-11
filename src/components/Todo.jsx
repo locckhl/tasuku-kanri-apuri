@@ -18,19 +18,22 @@ function Todo() {
   const [tasks, setTask] = useState([
     {
       text: "clean room",
-      deadLine: new Date("4/11/2000").toLocaleDateString(),
+      deadLine: new Date("2000-11-4").toISOString()
+      .split("T")[0],
       done: false,
       key: getKey(),
     },
     {
       text: "eat, sleep",
-      deadLine: new Date(Date.now()).toLocaleDateString(),
+      deadLine: new Date(Date.now()).toISOString()
+      .split("T")[0],
       done: false,
       key: getKey(),
     },
     {
       text: "clean room",
-      deadLine: new Date("4/11/2040").toLocaleDateString(),
+      deadLine: new Date("2040-11-4").toISOString()
+      .split("T")[0],
       done: false,
       key: getKey(),
     },
@@ -44,12 +47,25 @@ function Todo() {
       ...tasks,
       {
         text: text,
-        deadLine: new Date(newDate).toLocaleDateString(),
+        deadLine: new Date(new Date(newDate).getTime() - (new Date(newDate).getTimezoneOffset() * 60000 ))
+        .toISOString()
+        .split("T")[0],
         done: false,
         key: getKey(),
       },
     ]);
   };
+
+  const handleEdit = (newText, newDate, key) => {
+    const newItems = tasks.map((task) => {
+      if (task.key === key) {
+        task.text = newText;
+        task.deadLine = newDate;
+      }
+      return task;
+    });
+    setTask(newItems);
+  }
 
   const handleCheckBox = (checkedTask) => {
     const newItems = tasks.map((task) => {
@@ -77,7 +93,7 @@ function Todo() {
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
           {tasks.map((task) => (
-            <TodoItem task={task} handleCheckBox={handleCheckBox} deleteTask={deleteTask}/>
+            <TodoItem task={task} handleCheckBox={handleCheckBox} deleteTask={deleteTask} handleEdit={handleEdit}/>
           ))}
         </div>
       </div>
