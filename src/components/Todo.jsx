@@ -39,6 +39,14 @@ function Todo() {
     },
   ]);
 
+  const [tab, setTab] = useState('ALL');
+
+  const filteredTasks = tasks.filter( item => {
+    if (tab === 'ALL') return true;
+    if (tab === 'TODO') return !item.done;
+    if (tab === 'DONE') return item.done;
+  });
+
   const displayItems = tasks;
 
   const handleInput = (text, newDate) => {
@@ -82,19 +90,26 @@ function Todo() {
     setTask(newItems);
   }
 
+  const selectTab = value => {
+    setTab(value)
+  }
+
   return (
     <React.Fragment>
       {/* Create todo section  */}
       <Input handleInput={handleInput}></Input>
       <div className="p-2 mx-4 border-black-25 border-bottom"></div>
       {/* View options section  */}
-      <Filter></Filter>
+      <Filter status={tab} changeTab={selectTab} />
+        {filteredTasks.map(task => (
+          <TodoItem task={task} key={task.key} handleCheckBox={handleCheckBox} deleteTask={deleteTask} handleEdit={handleEdit} />
+      ))}
       <div className="row mx-1 px-5 pb-3 w-80 list">
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
-          {tasks.map((task) => (
+          {/* {tasks.map((task) => (
             <TodoItem task={task} handleCheckBox={handleCheckBox} deleteTask={deleteTask} handleEdit={handleEdit}/>
-          ))}
+          ))} */}
         </div>
       </div>
     </React.Fragment>

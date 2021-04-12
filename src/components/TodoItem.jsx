@@ -35,6 +35,7 @@ function TodoItem({ task, handleCheckBox, handleEdit, deleteTask }) {
       </h2> */}
         <input
           type="checkbox"
+          checked={task.done}
           style={{ transform: "scale(2)" }}
           onChange={() => {
             handleCheckBox(task);
