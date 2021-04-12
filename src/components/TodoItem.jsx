@@ -72,20 +72,14 @@ function TodoItem({ task, handleCheckBox, handleEdit, deleteTask }) {
       </div>
 
       <div className="col-auto d-flex align-items-center justify-content-between px-0">
-        {/* <h5 className="m-0 p-0 px-1">
-          <i className="fa fa-pencil"></i>
-        </h5>
-        <h5 className="m-0 p-0 px-1">
-          <i className="fa fa-trash-o" onClick={() => {deleteTask(task);}}></i>
-        </h5> */}
         <Edit task={task} handleInput={handleEdit} />
-        <Button className="ml-1">
-          <i
-            className="fa fa-trash-o"
-            onClick={() => {
-              deleteTask(task);
-            }}
-          ></i>
+        <Button
+          className="ml-1"
+          onClick={() => {
+            deleteTask(task);
+          }}
+        >
+          <i className="fa fa-trash-o"></i>
         </Button>
       </div>
     </div>

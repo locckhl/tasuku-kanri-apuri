@@ -13,9 +13,10 @@ import Filter from "./Filter";
 
 /* ライブラリ */
 import { getKey } from "../lib/util";
+import useStorage from "../hooks/storage";
 
 function Todo() {
-  const [tasks, setTask] = useState([
+  const [tasks, setTask] = useStorage([
     {
       text: "clean room",
       deadLine: new Date("2000-11-4").toISOString()
