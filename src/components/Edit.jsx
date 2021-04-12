@@ -1,14 +1,15 @@
 import React, { useState } from "react";
 import { Modal, Button } from "react-bootstrap";
+import Input from './Input'
 
 export default function Edit({ handleInput, task }) {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const [content, setContent] = useState(task.text);
-  const [newDate, setNewDate] = useState(task.deadLine);
-  const errorMes = "Input cannot be empty. Please enter something."
+  // const [content, setContent] = useState(task.text);
+  // const [newDate, setNewDate] = useState(task.deadLine);
+  // const errorMes = "Input cannot be empty. Please enter something."
 
   return (
     <div>
@@ -28,7 +29,8 @@ export default function Edit({ handleInput, task }) {
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="row m-1 ">
+          <Input handleInput={handleInput} task={task} handleClose={handleClose}></Input>
+          {/* <div className="row m-1 ">
             <div className="col col-11 mx-auto border ">
               <div className="row bg-white rounded shadow-sm p-2 add-todo-wrapper align-items-center justify-content-center">
                 <div className="col">
@@ -56,29 +58,18 @@ export default function Edit({ handleInput, task }) {
                   <label className="text-secondary my-2 p-0 px-1 view-opt-label due-date-label d-none">
                     Due date not set
                   </label>
-                  {/* <i
-            className="fa fa-calendar my-2 px-1 text-primary btn due-date-button"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title="Set a Due date"
-          ></i>
-          <i
-            className="fa fa-calendar-times-o my-2 px-1 text-danger btn clear-due-date-button d-none"
-            data-toggle="tooltip"
-            data-placement="bottom"
-            title="Clear Due date"
-          ></i> */}
+        
                   <input type="date" value = {newDate} onChange = {e => setNewDate(e.target.value)} />
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button
+          {/* <Button
             variant="primary"
             onClick={handleClose}
             onClick={() => {
@@ -92,7 +83,7 @@ export default function Edit({ handleInput, task }) {
               }}
           >
             Save Changes
-          </Button>
+          </Button> */}
         </Modal.Footer>
       </Modal>
     </div>
