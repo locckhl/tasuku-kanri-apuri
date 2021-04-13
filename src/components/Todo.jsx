@@ -20,40 +20,37 @@ function Todo() {
   const [tasks, setTask] = useStorage([
     {
       text: "clean room",
-      deadLine: new Date("2000-11-4").toISOString()
-      .split("T")[0],
+      deadLine: new Date("2000-11-4").toISOString().split("T")[0],
       done: false,
       key: getKey(),
     },
     {
       text: "eat, sleep",
-      deadLine: new Date(Date.now()).toISOString()
-      .split("T")[0],
+      deadLine: new Date(Date.now()).toISOString().split("T")[0],
       done: false,
       key: getKey(),
     },
     {
       text: "clean room",
-      deadLine: new Date("2040-11-4").toISOString()
-      .split("T")[0],
+      deadLine: new Date("2040-11-4").toISOString().split("T")[0],
       done: false,
       key: getKey(),
     },
   ]);
 
-  const [tab, setTab] = useState('ALL');
+  const [tab, setTab] = useState("ALL");
 
   const [searchInput, setSearchInput] = useState("");
 
-  const filteredTasks = tasks.filter( item => {
-    if (tab === 'ALL') return true;
-    if (tab === 'TODO') return !item.done;
-    if (tab === 'DONE') return item.done;
+  const filteredTasks = tasks.filter((item) => {
+    if (tab === "ALL") return true;
+    if (tab === "TODO") return !item.done;
+    if (tab === "DONE") return item.done;
   });
 
-  const filteredByNameTasks = filteredTasks.filter(item =>{
-    return (item.text.match(searchInput));
-  })
+  const filteredByNameTasks = filteredTasks.filter((item) => {
+    return item.text.match(searchInput);
+  });
 
   const handleInput = (text, newDate) => {
     console.log("inputed");
@@ -61,9 +58,12 @@ function Todo() {
       ...tasks,
       {
         text: text,
-        deadLine: new Date(new Date(newDate).getTime() - (new Date(newDate).getTimezoneOffset() * 60000 ))
-        .toISOString()
-        .split("T")[0],
+        deadLine: new Date(
+          new Date(newDate).getTime() -
+            new Date(newDate).getTimezoneOffset() * 60000
+        )
+          .toISOString()
+          .split("T")[0],
         done: false,
         key: getKey(),
       },
@@ -79,7 +79,7 @@ function Todo() {
       return task;
     });
     setTask(newItems);
-  }
+  };
 
   const handleCheckBox = (checkedTask) => {
     const newItems = tasks.map((task) => {
@@ -91,14 +91,14 @@ function Todo() {
     setTask(newItems);
   };
 
-  const deleteTask = chosenTask => {
-    const newItems = tasks.filter(task => task.key !== chosenTask.key);
+  const deleteTask = (chosenTask) => {
+    const newItems = tasks.filter((task) => task.key !== chosenTask.key);
     setTask(newItems);
-  }
+  };
 
-  const selectTab = value => {
-    setTab(value)
-  }
+  const selectTab = (value) => {
+    setTab(value);
+  };
 
   return (
     <React.Fragment>
@@ -108,15 +108,19 @@ function Todo() {
       <div className="p-2 mx-4 border-black-25 border-bottom"></div>
       {/* View options section  */}
       <Filter status={tab} changeTab={selectTab} />
-        {filteredByNameTasks.map(task => (
-          <TodoItem task={task} key={task.key} handleCheckBox={handleCheckBox} deleteTask={deleteTask} handleEdit={handleEdit} />
-      ))}
+
       <div className="row mx-1 px-5 pb-3 w-80 list">
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
-          {/* {tasks.map((task) => (
-            <TodoItem task={task} handleCheckBox={handleCheckBox} deleteTask={deleteTask} handleEdit={handleEdit}/>
-          ))} */}
+          {filteredByNameTasks.map((task) => (
+            <TodoItem
+              task={task}
+              key={task.key}
+              handleCheckBox={handleCheckBox}
+              deleteTask={deleteTask}
+              handleEdit={handleEdit}
+            />
+          ))}
         </div>
       </div>
     </React.Fragment>
