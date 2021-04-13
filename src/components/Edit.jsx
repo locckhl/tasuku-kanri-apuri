@@ -25,7 +25,7 @@ export default function Edit({ handleInput, task }) {
       >
         <Modal.Header closeButton>
           <Modal.Title id="example-custom-modal-styling-title">
-            Edit this note
+            このノートを編集
           </Modal.Title>
         </Modal.Header>
         <Modal.Body>
@@ -67,7 +67,7 @@ export default function Edit({ handleInput, task }) {
         </Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
-            Close
+            キャンセル
           </Button>
           {/* <Button
             variant="primary"

@@ -17,7 +17,7 @@ function Input({ handleInput, task, handleClose }) {
     }
     return new Date().toISOString().substr(0, 10);
   });
-  const errorMes = "Input cannot be empty. Please enter something.";
+  const errorMes = "申し訳ございません、空白はだめだよ　o((>ω< ))o";
 
   // useEffect(() => {
 
@@ -36,7 +36,7 @@ function Input({ handleInput, task, handleClose }) {
             <input
               className="border-0 add-todo-input bg-transparent rounded w-100"
               type="text"
-              placeholder="Add new .."
+              placeholder="入力してください　。。。。"
               value={content}
               onChange={(e) => {
                 setContent(e.target.value);
@@ -84,7 +84,7 @@ function Input({ handleInput, task, handleClose }) {
                 }
               }}
             >
-              {task ? "Edit" : "Add"}
+              {task ? "編集" : "追加"}
             </button>
           </div>
         </div>

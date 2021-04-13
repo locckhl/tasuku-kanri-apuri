@@ -28,7 +28,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
             changeTimeTab(e.target.value);
           }}
         >
-          Past
+          過去
         </button>
         <button
           value="TODAY"
@@ -41,7 +41,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
             changeTimeTab(e.target.value);
           }}
         >
-          Today
+          今日
         </button>
         <button
           value="FUTURE"
@@ -54,7 +54,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
             changeTimeTab(e.target.value);
           }}
         >
-          Future
+          将来
         </button>
       </div>
       <div className="col d-flex my-2  justify-content-end">
@@ -67,10 +67,10 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
             className="custom-select custom-select-sm btn my-2"
           >
             <option value="ALL" selected>
-              All
+              全て
             </option>
-            <option value="DONE">DONE</option>
-            <option value="TODO">TODO</option>
+            <option value="DONE">完了</option>
+            <option value="TODO">未完了</option>
           </select>
         </div>
         <div className="col-auto d-flex align-items-center px-1 pr-3">
@@ -79,9 +79,9 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
           </label>
           <select className="custom-select custom-select-sm btn my-2"  onChange={handleChangeSort.bind(null)}>
             <option value="added-date-asc" >
-              Added date
+              日付け⬇
             </option>
-            <option value="due-date-desc" selected>Due date</option>
+            <option value="due-date-desc" selected>日付け⬆</option>
           </select>
           <i
             className="fa fa fa-sort-amount-asc text-info btn mx-0 px-0 pl-1"

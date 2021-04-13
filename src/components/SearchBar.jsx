@@ -12,7 +12,7 @@ export default function SearchBar({setSearchInput}) {
             <input
               className="border-0 add-todo-input bg-transparent rounded w-100"
               type="text"
-              placeholder="Search ..."
+              placeholder="検索　。。。"
               value={content}
               onChange={(e) => {
                 setContent(e.target.value);
