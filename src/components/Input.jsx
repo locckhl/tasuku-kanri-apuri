@@ -64,7 +64,12 @@ function Input({ handleInput, task, handleClose }) {
             <input
               type="date"
               value={newDate}
-              onChange={(e) => setNewDate(e.target.value)}
+              onChange={(e) => {
+                if(e.target.value >= ((new Date()).toISOString().substr(0,10)))
+                  setNewDate(e.target.value)
+                else
+                  alert("Cannot set due date at the day before today.")
+              }}
             />
           </div>
           <div className="col-auto px-0 mx-0 mr-2">
