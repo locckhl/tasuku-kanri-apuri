@@ -4,10 +4,15 @@
 　・タブで表示する
 　・サポートするステータスは「すべて」「未完了」「完了済み」
 */
-function Filter({ timeFilter, changeTab, changeTimeTab }) {
+function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
   const handleChangeFilter = (event) => {
     changeTab(event.target.value);
   };
+
+  const handleChangeSort = (event) => {
+    sortTimeTab(event.target.value);
+  };
+
 
   return (
     <div className="row px-5">
@@ -72,11 +77,11 @@ function Filter({ timeFilter, changeTab, changeTimeTab }) {
           <label className="text-secondary my-2 pr-2 view-opt-label">
             Sort
           </label>
-          <select className="custom-select custom-select-sm btn my-2">
-            <option value="added-date-asc" selected>
+          <select className="custom-select custom-select-sm btn my-2"  onChange={handleChangeSort.bind(null)}>
+            <option value="added-date-asc" >
               Added date
             </option>
-            <option value="due-date-desc">Due date</option>
+            <option value="due-date-desc" selected>Due date</option>
           </select>
           <i
             className="fa fa fa-sort-amount-asc text-info btn mx-0 px-0 pl-1"
