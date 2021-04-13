@@ -10,6 +10,7 @@ import React, { useState } from "react";
 import TodoItem from "./TodoItem";
 import Input from "./Input";
 import Filter from "./Filter";
+import SearchBar from "./SearchBar";
 
 /* ライブラリ */
 import { getKey } from "../lib/util";
@@ -42,13 +43,17 @@ function Todo() {
 
   const [tab, setTab] = useState('ALL');
 
+  const [searchInput, setSearchInput] = useState("");
+
   const filteredTasks = tasks.filter( item => {
     if (tab === 'ALL') return true;
     if (tab === 'TODO') return !item.done;
     if (tab === 'DONE') return item.done;
   });
 
-  const displayItems = tasks;
+  const filteredByNameTasks = filteredTasks.filter(item =>{
+    return (item.text.match(searchInput));
+  })
 
   const handleInput = (text, newDate) => {
     console.log("inputed");
@@ -99,10 +104,11 @@ function Todo() {
     <React.Fragment>
       {/* Create todo section  */}
       <Input handleInput={handleInput}></Input>
+      <SearchBar setSearchInput={setSearchInput}></SearchBar>
       <div className="p-2 mx-4 border-black-25 border-bottom"></div>
       {/* View options section  */}
       <Filter status={tab} changeTab={selectTab} />
-        {filteredTasks.map(task => (
+        {filteredByNameTasks.map(task => (
           <TodoItem task={task} key={task.key} handleCheckBox={handleCheckBox} deleteTask={deleteTask} handleEdit={handleEdit} />
       ))}
       <div className="row mx-1 px-5 pb-3 w-80 list">
