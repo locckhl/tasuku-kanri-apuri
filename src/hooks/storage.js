@@ -12,7 +12,6 @@ import { useState, useEffect } from "react";
 const STORAGE_KEY = "tasks";
 
 function useStorage(input) {
-  console.log(input);
   const [tasks, setItems] = useState(input); /* 副作用を使う */
   useEffect(() => {
     const data = window.localStorage.getItem(STORAGE_KEY);

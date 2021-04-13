@@ -11,7 +11,7 @@ import { useState } from "react";
 function App() {
   const [user, setUser] = useState({
     avatar: "string",
-    name: "nyaaaaa",
+    name: "Tasuku Kanri",
   });
 
 

@@ -4,50 +4,68 @@
 　・タブで表示する
 　・サポートするステータスは「すべて」「未完了」「完了済み」
 */
-function Filter({ value, changeTab }) {
-
+function Filter({ timeFilter, changeTab, changeTimeTab }) {
   const handleChangeFilter = (event) => {
-    if (event.target.value == "TODAY") {
-      changeTab("ALL");
-    } else {
-      changeTab(event.target.value);
-    }
-  
+    changeTab(event.target.value);
   };
 
-
-  // return (
-  //    <div className="panel-tabs">
-  //     <a href="#" 
-  //       className={value === 'ALL' ?  'is-active' : ''}
-  //       onClick={handleChangeFilter.bind(null, 'ALL')}  
-  //     >全て</a>
-  //     <a href="#" 
-  //       className={value === 'TODO' ?  'is-active' : ''}
-  //       onClick={handleChangeFilter.bind(null, 'TODO')}  
-  //     >未完了</a>
-  //     <a href="#" 
-  //       className={value === 'DONE' ?  'is-active' : ''}
-  //       onClick={handleChangeFilter.bind(null, 'DONE')}  
-  //     >完了済み</a>
-  //   </div>
-  // );
   return (
     <div className="row px-5">
+      <div className="col d-flex my-2  justify-content-center">
+        <button
+          value="PAST"
+          className={
+            timeFilter === "ALL"
+              ? "btn btn-primary mx-1 active"
+              : "btn btn-primary mx-1 "
+          }
+          onClick={(e) => {
+            changeTimeTab(e.target.value);
+          }}
+        >
+          Past
+        </button>
+        <button
+          value="TODAY"
+          className={
+            timeFilter === "TODO"
+              ? "btn btn-primary mx-1 active"
+              : "btn btn-primary mx-1 "
+          }
+          onClick={(e) => {
+            changeTimeTab(e.target.value);
+          }}
+        >
+          Today
+        </button>
+        <button
+          value="FUTURE"
+          className={
+            timeFilter === "DONE"
+              ? "btn btn-primary mx-1 active"
+              : "btn btn-primary mx-1 "
+          }
+          onClick={(e) => {
+            changeTimeTab(e.target.value);
+          }}
+        >
+          Future
+        </button>
+      </div>
       <div className="col d-flex my-2  justify-content-end">
         <div className="col-auto d-flex align-items-center">
           <label className="text-secondary my-2 pr-2 view-opt-label">
             Filter
           </label>
           <select
-            onChange={handleChangeFilter.bind(null)}  
-            className="custom-select custom-select-sm btn my-2">
+            onChange={handleChangeFilter.bind(null)}
+            className="custom-select custom-select-sm btn my-2"
+          >
             <option value="ALL" selected>
               All
             </option>
             <option value="DONE">DONE</option>
             <option value="TODO">TODO</option>
-            <option value="TODAY">Has due date</option>
           </select>
         </div>
         <div className="col-auto d-flex align-items-center px-1 pr-3">

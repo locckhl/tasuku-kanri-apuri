@@ -15,9 +15,9 @@ export default function UserInfo({ user }) {
                 <h1>
                   <b>{user.name}</b>
                 </h1>
-                <label for="song_image" class="custom-file-upload">
+                {/* <label for="song_image" class="custom-file-upload">
                   <i class="fa fa-cloud-upload"></i> Upload Ava
-                </label>
+                </label> */}
                 <input id="song_image" type="file" />
               </div>
 

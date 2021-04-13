@@ -40,6 +40,8 @@ function Todo() {
 
   const [tab, setTab] = useState("ALL");
 
+  const [timeFilter, setTimeFilter] = useState("TODAY");
+  
   const [searchInput, setSearchInput] = useState("");
 
   const filteredTasks = tasks.filter((item) => {
@@ -50,6 +52,12 @@ function Todo() {
 
   const filteredByNameTasks = filteredTasks.filter((item) => {
     return item.text.match(searchInput);
+  });
+
+  const filteredByTime = filteredByNameTasks.filter((item) => {
+    if (timeFilter === "PAST") return Date.parse(item.deadLine) < Date.now() ;
+    if (timeFilter === "TODAY") return Date.parse(item.deadLine) === Date.parse(new Date().getFullYear()+'-'+("0" + (new Date().getMonth() + 1)).slice(-2)+'-'+("0" + new Date().getDate()).slice(-2));
+    if (timeFilter === "FUTURE") return Date.parse(item.deadLine) > Date.now() ;
   });
 
   const handleInput = (text, newDate) => {
@@ -100,6 +108,10 @@ function Todo() {
     setTab(value);
   };
 
+  const changeTimeTab = (value) => {
+    // console.log(value)
+    setTimeFilter(value)
+  }
   return (
     <React.Fragment>
       {/* Create todo section  */}
@@ -107,12 +119,12 @@ function Todo() {
       <SearchBar setSearchInput={setSearchInput}></SearchBar>
       <div className="p-2 mx-4 border-black-25 border-bottom"></div>
       {/* View options section  */}
-      <Filter status={tab} changeTab={selectTab} />
+      <Filter timeFilter={timeFilter} changeTab={selectTab} changeTimeTab={changeTimeTab} />
 
       <div className="row mx-1 px-5 pb-3 w-80 list">
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
-          {filteredByNameTasks.map((task) => (
+          {filteredByTime.map((task) => (
             <TodoItem
               task={task}
               key={task.key}
