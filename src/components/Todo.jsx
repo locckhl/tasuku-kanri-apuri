@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import ItemPagination from "./ItemPagination";
 /* 
   【Todoのデータ構成】
 　・key：Todoを特定するID（String）
@@ -38,13 +39,12 @@ function Todo() {
     },
   ]);
 
-
   const [tab, setTab] = useState("ALL");
 
   const [timeFilter, setTimeFilter] = useState("TODAY");
 
   const [timeSort, setTimeSort] = useState("due-date-desc");
-  
+
   const [searchInput, setSearchInput] = useState("");
 
   const filteredTasks = tasks.filter((item) => {
@@ -53,21 +53,47 @@ function Todo() {
     if (tab === "DONE") return item.done;
   });
 
+  const [currentPage, setCurrentPage] = useState(2);
+
+  const itemPerPage = 5;
+
   const filteredByNameTasks = filteredTasks.filter((item) => {
     return item.text.match(searchInput);
   });
 
   const filteredByTime = filteredByNameTasks.filter((item) => {
-    if (timeFilter === "PAST") return Date.parse(item.deadLine) < Date.now() ;
-    if (timeFilter === "TODAY") return Date.parse(item.deadLine) === Date.parse(new Date().getFullYear()+'-'+("0" + (new Date().getMonth() + 1)).slice(-2)+'-'+("0" + new Date().getDate()).slice(-2));
-    if (timeFilter === "FUTURE") return Date.parse(item.deadLine) > Date.now() ;
+    const dateNow = Date.parse(
+      new Date().getFullYear() +
+        "-" +
+        ("0" + (new Date().getMonth() + 1)).slice(-2) +
+        "-" +
+        ("0" + new Date().getDate()).slice(-2)
+    );
+
+    if (timeFilter === "PAST") return Date.parse(item.deadLine) < dateNow;
+    if (timeFilter === "TODAY") return Date.parse(item.deadLine) === dateNow;
+    if (timeFilter === "FUTURE") return Date.parse(item.deadLine) > dateNow;
   });
 
   const sortByTime = filteredByTime.sort((a, b) => {
-    if (timeSort === "added-date-asc") return  new Date(b.deadLine) - new Date(a.deadLine); 
-    if (timeSort === "due-date-desc") return new Date(a.deadLine) - new Date(b.deadLine);
+    if (timeSort === "added-date-asc")
+      return new Date(b.deadLine) - new Date(a.deadLine);
+    if (timeSort === "due-date-desc")
+      return new Date(a.deadLine) - new Date(b.deadLine);
   });
- 
+
+  let itemLength = sortByTime.length;
+  // console.log(`length ${ itemLength}`)
+
+  const paginateItems = sortByTime.filter((item) => {
+    // console.log(`max ${itemPerPage*currentPage}`)
+
+    return (
+      sortByTime.indexOf(item) + 1 <= itemPerPage * currentPage &&
+      itemPerPage * (currentPage - 1) < sortByTime.indexOf(item) + 1
+    );
+  });
+
   const handleInput = (text, newDate) => {
     console.log("inputed");
     setTask([
@@ -118,13 +144,13 @@ function Todo() {
 
   const changeTimeTab = (value) => {
     // console.log(value)
-    setTimeFilter(value)
-  }
+    setTimeFilter(value);
+  };
 
   const sortTimeTab = (value) => {
-    setTimeSort(value)
-  }
-  console.log(timeFilter)
+    setTimeSort(value);
+  };
+  console.log(timeFilter);
   return (
     <React.Fragment>
       {/* Create todo section  */}
@@ -132,20 +158,40 @@ function Todo() {
       <SearchBar setSearchInput={setSearchInput}></SearchBar>
       <div className="p-2 mx-4 border-black-25 border-bottom"></div>
       {/* View options section  */}
-      <Filter timeFilter={timeFilter} changeTab={selectTab} changeTimeTab={changeTimeTab} sortTimeTab={sortTimeTab}/>
+      <Filter
+        timeFilter={timeFilter}
+        changeTab={selectTab}
+        changeTimeTab={changeTimeTab}
+        sortTimeTab={sortTimeTab}
+        setCurrentPage={setCurrentPage}
+      />
 
       <div className="row mx-1 px-5 pb-3 w-80 list">
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
-          {sortByTime.map((task) => (
-            <TodoItem
-              task={task}
-              key={task.key}
-              handleCheckBox={handleCheckBox}
-              deleteTask={deleteTask}
-              handleEdit={handleEdit}
-            />
-          ))}
+
+          {paginateItems.length ? <ItemPagination
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+            itemLength={itemLength}
+            itemPerPage={itemPerPage}
+          ></ItemPagination> : <div></div>}
+          
+          {paginateItems.length ?   (
+            paginateItems.map((task) => (
+              <TodoItem
+                task={task}
+                key={task.key}
+                handleCheckBox={handleCheckBox}
+                deleteTask={deleteTask}
+                handleEdit={handleEdit}
+              />
+            ))
+          ) : (
+            <div className="font-weight-bold text-danger d-flex align-self-center justify-content-center">
+              タスクはないね
+            </div>
+          )}
         </div>
       </div>
     </React.Fragment>

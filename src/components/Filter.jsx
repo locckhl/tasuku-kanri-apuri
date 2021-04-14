@@ -4,7 +4,7 @@
 　・タブで表示する
 　・サポートするステータスは「すべて」「未完了」「完了済み」
 */
-function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
+function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab, setCurrentPage }) {
   const handleChangeFilter = (event) => {
     changeTab(event.target.value);
   };
@@ -15,12 +15,14 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
 
 
   return (
-    <div className="row px-5">
+    <div className="row px-5" onClick={()=>{
+      setCurrentPage(1)
+    }}>
       <div className="col d-flex my-2  justify-content-center">
         <button
           value="PAST"
           className={
-            timeFilter === "ALL"
+            timeFilter === "PAST"
               ? "btn btn-primary mx-1 active"
               : "btn btn-primary mx-1 "
           }
@@ -33,7 +35,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
         <button
           value="TODAY"
           className={
-            timeFilter === "TODO"
+            timeFilter === "TODAY"
               ? "btn btn-primary mx-1 active"
               : "btn btn-primary mx-1 "
           }
@@ -46,7 +48,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
         <button
           value="FUTURE"
           className={
-            timeFilter === "DONE"
+            timeFilter === "FUTURE"
               ? "btn btn-primary mx-1 active"
               : "btn btn-primary mx-1 "
           }

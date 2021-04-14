@@ -48,12 +48,12 @@ function TodoItem({ task, handleCheckBox, handleEdit, deleteTask }) {
           className="form-control form-control-lg border-0 edit-todo-input bg-transparent rounded px-3"
           readonly
           value={task.text}
-          title="Buy groceries for next week"
+          title={task.text}
         />
         <input
           type="text"
           className="form-control form-control-lg border-0 edit-todo-input rounded px-3 d-none"
-          value="Buy groceries for next week"
+          value={task.text}
         />
       </div>
       <div className="col-auto m-1 p-0 px-3">
