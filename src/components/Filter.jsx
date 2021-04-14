@@ -4,7 +4,7 @@
 　・タブで表示する
 　・サポートするステータスは「すべて」「未完了」「完了済み」
 */
-function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
+function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab, setCurrentPage }) {
   const handleChangeFilter = (event) => {
     changeTab(event.target.value);
   };
@@ -15,7 +15,9 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab }) {
 
 
   return (
-    <div className="row px-5">
+    <div className="row px-5" onClick={()=>{
+      setCurrentPage(1)
+    }}>
       <div className="col d-flex my-2  justify-content-center">
         <button
           value="PAST"
