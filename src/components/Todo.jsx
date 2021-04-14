@@ -169,13 +169,15 @@ function Todo() {
       <div className="row mx-1 px-5 pb-3 w-80 list">
         <div className="col mx-auto d-flex flex-column justify-content-between ">
           {/* Todo Item 1 */}
-          <ItemPagination
+
+          {paginateItems.length ? <ItemPagination
             currentPage={currentPage}
             setCurrentPage={setCurrentPage}
             itemLength={itemLength}
             itemPerPage={itemPerPage}
-          ></ItemPagination>
-          {paginateItems.length ? (
+          ></ItemPagination> : <div></div>}
+          
+          {paginateItems.length ?   (
             paginateItems.map((task) => (
               <TodoItem
                 task={task}

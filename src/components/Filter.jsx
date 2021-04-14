@@ -22,7 +22,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab, setCurrentPa
         <button
           value="PAST"
           className={
-            timeFilter === "ALL"
+            timeFilter === "PAST"
               ? "btn btn-primary mx-1 active"
               : "btn btn-primary mx-1 "
           }
@@ -35,7 +35,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab, setCurrentPa
         <button
           value="TODAY"
           className={
-            timeFilter === "TODO"
+            timeFilter === "TODAY"
               ? "btn btn-primary mx-1 active"
               : "btn btn-primary mx-1 "
           }
@@ -48,7 +48,7 @@ function Filter({ timeFilter, changeTab, changeTimeTab,sortTimeTab, setCurrentPa
         <button
           value="FUTURE"
           className={
-            timeFilter === "DONE"
+            timeFilter === "FUTURE"
               ? "btn btn-primary mx-1 active"
               : "btn btn-primary mx-1 "
           }
